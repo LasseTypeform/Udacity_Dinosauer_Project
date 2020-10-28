@@ -1,4 +1,29 @@
 
+var allDinos = [];
+
+// Fetching data from the dino.json file in repository
+
+const getDataFromJson = (async() => {
+
+    // Attempt to retreive data from the json file:
+    try{
+        let response = await (await fetch('./dino.json')).json();
+
+
+        allDinos.push(response.Dinos)
+
+        //If all goes well, response is stored
+        return {
+            allDinos
+        }
+    }   // If error happens, the following is show:
+        catch (error) {
+        console.log('Error in try/catch=>', error)
+    }
+
+})();
+
+console.log('allDinos =>', allDinos)
     // Create Dino Constructor
 
 
