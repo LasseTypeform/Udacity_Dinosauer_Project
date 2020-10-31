@@ -1,71 +1,138 @@
+// All Dinodata from dino.json 
 
-var allDinos = [];
-
-// Fetching data from the dino.json file in repository
-
-
-
-const getDataFromJson = (async() => {
-
-    // Attempt to retreive data from the json file:
-    try{
-        let response = await (await fetch('./dino.json')).json();
-
-        // console.log('response.Dinos =>', response.Dinos)
-
-        response.Dinos.forEach(ele => {
-            // console.log(ele)
-            // console.log(response.Dinos[ele])
-
-            allDinos.push(ele)
-        })
-        
-    }   // If error happens, the following is show:
-        catch (error) {
-        console.log('Error in try/catch=>', error)
+var DinosData = [
+    {
+        "species": "Triceratops",
+        "weight": 13000,
+        "height": 114,
+        "diet": "herbavor",
+        "where": "North America",
+        "when": "Late Cretaceous",
+        "fact": "First discovered in 1889 by Othniel Charles Marsh"
+    },
+    {
+        "species": "Tyrannosaurus Rex",
+        "weight": 11905,
+        "height": 144,
+        "diet": "carnivor",
+        "where": "North America",
+        "when": "Late Cretaceous",
+        "fact": "The largest known skull measures in at 5 feet long."
+    },
+    {
+        "species": "Anklyosaurus",
+        "weight": 10500,
+        "height": 55,
+        "diet": "herbavor",
+        "where": "North America",
+        "when": "Late Cretaceous",
+        "fact": "Anklyosaurus survived for approximately 135 million years."
+    },
+    {
+        "species": "Brachiosaurus",
+        "weight": 70000,
+        "height": "372",
+        "diet": "herbavor",
+        "where": "North America",
+        "when": "Late Jurasic",
+        "fact": "An asteroid was named 9954 Brachiosaurus in 1991."
+    },
+    {
+        "species": "Stegosaurus",
+        "weight": 11600,
+        "height": 79,
+        "diet": "herbavor",
+        "where": "North America, Europe, Asia",
+        "when": "Late Jurasic to Early Cretaceous",
+        "fact": "The Stegosaurus had between 17 and 22 seperate places and flat spines."
+    },
+    {
+        "species": "Elasmosaurus",
+        "weight": 16000,
+        "height": 59,
+        "diet": "carnivor",
+        "where": "North America",
+        "when": "Late Cretaceous",
+        "fact": "Elasmosaurus was a marine reptile first discovered in Kansas."
+    },
+    {
+        "species": "Pteranodon",
+        "weight": 44,
+        "height": 20,
+        "diet": "carnivor",
+        "where": "North America",
+        "when": "Late Cretaceous",
+        "fact": "Actually a flying reptile, the Pteranodon is not a dinosaur."
+    },
+    {
+        "species": "Pigeon",
+        "weight": 0.5,
+        "height": 9,
+        "diet": "herbavor",
+        "where": "World Wide",
+        "when": "Holocene",
+        "fact": "All birds are living dinosaurs."
     }
-
-})();
-
-// console.log('allDinos', allDinos);
-// console.log('allDinos =>', allDinos);
-
-    // (function newLoop(arrnew) {
-    //     debugger
-    //     // console.log(arrnew);
-
-    //    arrnew.forEach(ele => console.log(ele));
-
-  
-             
-    // })(allDinos);
-
-    // const newLoop = function(arrnew) {
-    //     // debugger
-    //     // console.log(arrnew);
-
-    //    arrnew.forEach(ele => console.log(ele));
-    // };
-
-    let myLoopFunction = (function(arr) {
-        temp = arr
-        let arrnew = []
-        function innerLoop (temp) {
-            temp.forEach( (ele, idx) => arrnew.push(ele[idx]));
-            console.log(arrnew);
-        }
-        return{
-            newMethod: innerLoop
-        };
-    }());
-
-   
-    
-
+];
     // Create Dino Constructor
 
-    // Create Dino Objects
+    function DinoConstructor(arr) {
+     
+        this.species = arr.species,
+        this.weight = arr.weight,
+        this.height = arr.height,
+        this.diet = arr.diet,
+        this.where = arr.where,
+        this.when = arr.when,
+        this.fact = arr.fact
+      
+    };
+    // Add prototypes to the Dino constructor
+    DinoConstructor.prototype.compareWeight = function() {
+        console.log(`The weight of ${this.species} is ${this.weight}`)
+    };
+    DinoConstructor.prototype.compareHeight = function() {
+        console.log(`The Height of ${this.species} is ${this.height}`)
+    };
+    DinoConstructor.prototype.compareDiet = function() {
+        console.log(`The Diet of ${this.species} is ${this.diet}`)
+    };
 
+
+    // console.log(DinosData);
+    const newDino = new DinoConstructor(DinosData[1]);
+
+
+    // Creating a loop that creates each Dino
+
+    const DinosCreated = []
+
+    console.log(newDino);
+    console.log(newDino.compareWeight());
+
+
+    (function createDinoLoop(DinosDataArr){
+        let count = 1
+        for(var i=0; i < DinosDataArr.length; i++) {
+
+            let str = 'DinoNumber'+count;
+            
+            // let newDino = ''
+
+            str = new DinoConstructor(DinosDataArr[i]);
+            DinosCreated.push(newDino);
+            count++
+        }
+
+    })(DinosData);
+
+    console.log(DinosCreated);
+
+
+    // Create Dino Objects
+        // let newDino = Object.create(DinoConstructor)
+
+        // console.log(newDino)
 
     // Create Human Object
 
