@@ -98,45 +98,35 @@ var dinosData = [
         console.log(`The Diet of ${this.species} is ${this.diet}`)
     };
 
+    const dinosCreated = [];
 
-    const dinosCreated = ['name', []];
-
-    // Loop that creates the name for each Dino in the dinosCreated array
-    // (function createDinoName(dinosDataArr){
-    //     let count = 1
-    //     for(var i=0; i < dinosDataArr.length; i++) {
-
-    //         let str = 'DinoNumber'+count;
-      
-    //         let temp = [str] = [];
-    //         dinosCreated.name = str;
-    //         count++
-    //     }
-    // })(dinosData);
-    console.log('dinosCreated', dinosCreated);
-
-
-    // Loop through all the Original Dinosauers and assing them to a dino name in the dinosCreated array
-    // (function createDinoLoop(dinosDataArr, dinosCreated){
+    // Loop through the Original Dinosauers 
+    (function createDinoLoop(dinosDataArr){
    
-    //     let temp = [];   
-    //     console.log('dinosCreated', dinosCreated)
+        let temp;   
         
-    //     dinosDataArr.forEach((ele, index) => {
-    //         idx = index
-
-    //         temp = new DinoConstructor(dinosDataArr[index]); 
-            
-    //         console.log('dinosCreated', dinosCreated)
-    //         console.log('dinosCreated[index]', dinosCreated[idx])
-
-    //         console.log('temp after forEach', temp);
-
-    //       });
-
-    // })(dinosData, dinosCreated);
+        dinosDataArr.forEach((ele, index) => {
+        
+        temp = new DinoConstructor(ele); 
+        dinosCreated.push(temp)
+        });
+   
+    })(dinosData);
 
     console.log('dinosCreated =>', dinosCreated);
+
+    // Loop that creates the name for each Dino in the dinosCreated array
+    (function createDinoName(dinosDataArr){
+        let count = 1
+        for(var i=0; i < dinosDataArr.length; i++) {
+
+            let str = 'DinoNumber'+count;
+      
+            dinosCreated[i].name = str;
+            count++
+        }
+    })(dinosCreated);
+
 
 
     // Create Dino Objects
