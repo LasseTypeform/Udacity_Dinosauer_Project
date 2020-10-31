@@ -1,6 +1,6 @@
 // All Dinodata from dino.json 
 
-var DinosData = [
+var dinosData = [
     {
         "species": "Triceratops",
         "weight": 13000,
@@ -77,7 +77,7 @@ var DinosData = [
     // Create Dino Constructor
 
     function DinoConstructor(arr) {
-     
+        this.name = ''
         this.species = arr.species,
         this.weight = arr.weight,
         this.height = arr.height,
@@ -99,34 +99,44 @@ var DinosData = [
     };
 
 
-    // console.log(DinosData);
-    const newDino = new DinoConstructor(DinosData[1]);
+    const dinosCreated = ['name', []];
+
+    // Loop that creates the name for each Dino in the dinosCreated array
+    // (function createDinoName(dinosDataArr){
+    //     let count = 1
+    //     for(var i=0; i < dinosDataArr.length; i++) {
+
+    //         let str = 'DinoNumber'+count;
+      
+    //         let temp = [str] = [];
+    //         dinosCreated.name = str;
+    //         count++
+    //     }
+    // })(dinosData);
+    console.log('dinosCreated', dinosCreated);
 
 
-    // Creating a loop that creates each Dino
+    // Loop through all the Original Dinosauers and assing them to a dino name in the dinosCreated array
+    // (function createDinoLoop(dinosDataArr, dinosCreated){
+   
+    //     let temp = [];   
+    //     console.log('dinosCreated', dinosCreated)
+        
+    //     dinosDataArr.forEach((ele, index) => {
+    //         idx = index
 
-    const DinosCreated = []
-
-    console.log(newDino);
-    console.log(newDino.compareWeight());
-
-
-    (function createDinoLoop(DinosDataArr){
-        let count = 1
-        for(var i=0; i < DinosDataArr.length; i++) {
-
-            let str = 'DinoNumber'+count;
+    //         temp = new DinoConstructor(dinosDataArr[index]); 
             
-            // let newDino = ''
+    //         console.log('dinosCreated', dinosCreated)
+    //         console.log('dinosCreated[index]', dinosCreated[idx])
 
-            str = new DinoConstructor(DinosDataArr[i]);
-            DinosCreated.push(newDino);
-            count++
-        }
+    //         console.log('temp after forEach', temp);
 
-    })(DinosData);
+    //       });
 
-    console.log(DinosCreated);
+    // })(dinosData, dinosCreated);
+
+    console.log('dinosCreated =>', dinosCreated);
 
 
     // Create Dino Objects
