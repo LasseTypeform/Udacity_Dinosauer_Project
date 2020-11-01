@@ -23,12 +23,12 @@
     <form id="dino-compare">
         <div class="form-container">
             <p>Name:</p>
-            <input id="name" class="form-field__full" type="name" name="name" value="something">
+            <input id="name" class="form-field__full" type="name" name="name">
             
             
             <div id="chooseMeasurement">
                 <label for="imperial">Imperial</label>
-                <input type="radio" id="imp" name="unit" value="imp" onclick="changeUnit()">
+                <input type="radio" id="imp" name="unit" value="imp" onclick="changeUnit()" checked='true'>
 
                 <label for="imperial">Metric</label>
                 <input type="radio" id="meter" name="unit" value="meter" onclick="changeUnit()">
@@ -40,27 +40,27 @@
 
             <p>Height</p>
             <label>Feet: 
-                <input id="feet" class="form-field__short" type="number" name="feet" value=1></label>
+                <input id="feet" class="form-field__short" type="number" name="feet"></label>
             <label>inches: 
-                <input id="inches" class="form-field__short" type="number" name="inches" value=4></label>
+                <input id="inches" class="form-field__short" type="number" name="inches"></label>
                
             <!-- Weight -->
             <p>Weight in lbs:</p>
             <label>
-                <input id="imp-weight" class="form-field__full" type="number" name="weight" value=40></label>
+                <input id="imp-weight" class="form-field__full" type="number" name="weight"></label>
             </div>
 
             <!-- CM -->
             <div id='metric-fields'>
                 <p>Height in cm:</p>
                 <label>
-                    <input id="cm" class="form-field__short" type="number" name="cm" value=170>
+                    <input id="cm" class="form-field__short" type="number" name="cm">
                 </label>
 
                  <!-- Weight -->
                 <p>Weight in kg:</p>
                 <label>
-                <input id="kg-weight" class="form-field__full" type="number" name="weight" value=60></label>
+                <input id="kg-weight" class="form-field__full" type="number" name="weight"></label>
           
             </div>
             
@@ -71,7 +71,7 @@
                 <option>Omnivor</option>
                 <option>Carnivor</option>
             </select>
-            <div id="btn">Compare Me!</div>
+            <div id="btn" onclick='getHumanDataFromForm()'>Compare Me!</div>
         </div>
     </form>
     <!-- .grid to attach tiles to -->

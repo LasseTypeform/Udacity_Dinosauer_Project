@@ -83,8 +83,8 @@ var dinosData = [
         this.diet = arr.diet,
         this.where = arr.where,
         this.when = arr.when,
-        this.fact = arr.fact
-      
+        this.fact = arr.fact,
+        this.image = `./images/${(this.species.toLowerCase())}.png`      
     };
     // Add prototypes to the Dino constructor
 
@@ -141,11 +141,12 @@ var dinosData = [
     console.log('dinosCreated =>', dinosCreated);
 
     // Create Human Object
-    let Human
+    let Human;
 
     // Use IIFE to get human data from form
-    function GetHumanData(){
+    function HumanConstructor(){
 
+        this.species = 'human',
         this.name = document.getElementById('name').value
 
         // Converting the Human heights to inches
@@ -162,7 +163,7 @@ var dinosData = [
  
 
         // Adding the weight from form to Human
-        if(document.getElementById('meter').checked) {
+        if(!document.getElementById('meter').checked) {
           
             this.weight =  Number(document.getElementById('imp-weight').value)
         } else{
@@ -174,7 +175,13 @@ var dinosData = [
         this.diet = document.getElementById('diet').value
     };
 
-        Human = new GetHumanData()
+    function getHumanDataFromForm(obj) {
+        
+        obj = new HumanConstructor()
+        console.log('Human', obj);
+
+    }(Human);
+        
         console.log('Human', Human);
 
    
