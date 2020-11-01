@@ -135,14 +135,27 @@ var dinosData = [
         temp = new DinoConstructor(ele); 
         dinosCreated[index].push(temp)
         });
-   
+        
+        
     })(dinosData);
 
     console.log('dinosCreated =>', dinosCreated);
 
     // Create Human Object
-    let Human;
+    let Human = [];
 
+
+    // Add it to the dinosCreated list
+    dinosCreated.splice(4, 0, Human);
+
+    (function addHuman(dinosDataArr){
+        
+            dinosCreated[4].push('human')
+     
+        
+    })(dinosCreated);
+
+   
     // Use IIFE to get human data from form
     function HumanConstructor(){
 
@@ -175,14 +188,15 @@ var dinosData = [
         this.diet = document.getElementById('diet').value
     };
 
-    function getHumanDataFromForm(obj) {
+    function getHumanDataFromForm() {
         
-        obj = new HumanConstructor()
-        console.log('Human', obj);
-
+        dinosCreated[4][1] = new HumanConstructor()
+        // return (console.log('dinosCreated including Human after Onclick=>', dinosCreated))
     }(Human);
         
-        console.log('Human', Human);
+        console.log('dinosCreated a', dinosCreated);
+
+
 
    
 
