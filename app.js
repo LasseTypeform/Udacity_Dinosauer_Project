@@ -91,7 +91,6 @@ var dinosData = [
      // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
     DinoConstructor.prototype.compareWeight = function() {
-
         console.log(`The weight of ${this.species} is ${this.weight}`)
     };
 
@@ -109,55 +108,32 @@ var dinosData = [
 
     const dinosCreated = [];
 
-        // Loop that creates the name for each Dino in the dinosCreated array
-        (function createDinoName(dinosDataArr){
-            let count = 1
-            for(var i=0; i < dinosDataArr.length; i++) {
-    
-                let str = 'Dino number '+count;
-          
-                dinosCreated.push([str.valueOf()])
-         
-                count++
-            }
-        })(dinosData);
-    
-        console.log('dinosCreated =>', dinosCreated);
-    
     // Create Dino Objects
 
     // Loop through the Original Dinosauers and invoke the Constructor function on each of them.
     (function createDinoLoop(dinosDataArr){
-   
         let temp;   
         
-        dinosDataArr.forEach((ele, index) => {
+        dinosDataArr.forEach((ele) => {
         
         temp = new DinoConstructor(ele); 
-        dinosCreated[index].push(temp)
+        dinosCreated.push(temp)
         });
-        
-        
+       
     })(dinosData);
 
-    console.log('dinosCreated =>', dinosCreated);
 
     // Create Human Object
+    let person;
     let Human = [];
 
+    Human.push(person);
+  
     // Add it to the dinosCreated list
-    // dinosCreated.splice(4, 0, Human);
-
-    // (function addHuman(){
-        
-    //         dinosCreated[4].push('human')
-     
-    // })(dinosCreated);
-
-   
+    dinosCreated.splice(4, 0, Human);
+    
     // Use IIFE to get human data from form
     function HumanConstructor(){
-
         this.species = 'human',
         this.image = `./images/${(this.species.toLowerCase())}.png`    
         this.name = document.getElementById('name').value
@@ -187,75 +163,64 @@ var dinosData = [
         this.diet = document.getElementById('diet').value
     };
 
+    // On button click, prepare and display infographic
     function getHumanDataFromForm() {
         
-        dinosCreated[4][1] = new HumanConstructor()
-
-     
+        dinosCreated[4] = new HumanConstructor()
+        displayTotalArray();
+        console.log('dinosCreated', dinosCreated);
+        hideForm();
     }(Human);
-        
-        console.log('dinosCreated a', dinosCreated);
-
-
-        (function displayTotalArray(){
-            
-            let divArray = []
-           dinosCreated.forEach((ele, idx) =>{
-
-                let tempEle = `<div key="${idx}">
-                
-                    <div>${ele[1].species}</div>
-                    <div>${ele[1].weight}</div>
-                    <div>${ele[1].height}</div>
-                    <div>${ele[1].diet}</div>
-                    <div>${ele[1].where}</div>
-                    <div>${ele[1].when}</div>
-                    <div>${ele[1].fact}</div>
-                    <div>${ele[1].image}</div>
-                    </div>`
-
-                
-                divArray += tempEle
-          
-            })
-            document.getElementById("grid").innerHTML = divArray;
-          
-        })();
-     
-      
-   
-
 
     // Generate Tiles for each Dino in Array
-    // (function ToggleForm(params) {
-    //     var elem = document.getElementById('grid');
-    //     elem.style['grid-template-columns'] = 'repeat(3, 1fr';
-    //     elem.style['grid-template-rows'] = 'repeat(3, 1fr';
-    //     elem.style['grid-template-rows'] = 'repeat(3, 1fr';
-    //     elem.style['grid-row-gap'] = '3px';
-    //     elem.style['grid-column-gap'] = '3px';
-    //     elem.style['position'] = 'absolute';
-    //     elem.style['top'] = '0';
-    //     elem.style['min-width'] = '100%';
-    //     elem.style['height'] = '100%';
-    //     elem.style['border'] = '1px black solid';
-    //     elem.style['margin'] = '0';
+    function displayTotalArray(){
+           
+        let divArray = []
+       dinosCreated.forEach((ele, idx) =>{
+    
+        if(ele.species === "Tyrannosaurus Rex"){
+            ele.image = './images/tyrannosaurusrex.png'
+        }
 
-    // })(); 
-        // Add tiles to DOM
+        if(ele.species === 'human'){
+            let tempEle = `<div key="${idx}" class="grid-item">
+               
+                    <h3>${ele.name}</h3>
+                    <img src='${ele.image}'></>
 
-    // Remove form from screen
-    // (function ToggleForm(params) {
-    //     var elem = document.getElementById('dino-compare');
-    //     elem.style.display = 'none';
-    // })();
+            </div>`
+            divArray += tempEle
 
-// On button click, prepare and display infographic
+        } else {let tempEle2 = `<div key="${idx}" class="grid-item">
+               
+                    <h3>${ele.species}</h3>
+                    <p>${ele.fact}</p>
+                    <img src='${ele.image}'></>
+
+            </div>`
+            divArray += tempEle2
+            }
+        })
+
+        document.getElementById("grid").innerHTML = divArray; 
+        showResetbtn();
+       
+    };
+
+// Hiding reset button from DOM
+// Hiding reset button from DOM
+(function hideResetBtn(){
+        document.getElementById('btnDiv').style.display = 'none';
+})();
+
+function showResetbtn(){
+    document.getElementById('btnDiv').style.display = 'block';
+}
 
 // Hiding metric options from DOM
 (function hideMetric(){
-    var elem = document.getElementById('metric-fields');
-        elem.style.display = 'none';
+    var metr = document.getElementById('metric-fields');
+        metr.style.display = 'none';
 })();
 
 function changeUnit() {
@@ -267,3 +232,13 @@ function changeUnit() {
         document.getElementById('imperial-fields').style.display = 'block'; 
     }
 }
+
+function hideForm(){
+    document.getElementById('dino-compare').style.display = 'none'
+}
+
+{/* <p>${ele.weight}</p>
+<p>${ele.height}</p>
+<p>${ele.diet}</p>
+<p>${ele.where}</p>
+<p>${ele.when}</p> */}
