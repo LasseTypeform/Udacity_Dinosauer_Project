@@ -91,6 +91,7 @@ var dinosData = [
      // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
     DinoConstructor.prototype.compareWeight = function() {
+
         console.log(`The weight of ${this.species} is ${this.weight}`)
     };
 
@@ -144,22 +145,21 @@ var dinosData = [
     // Create Human Object
     let Human = [];
 
-
     // Add it to the dinosCreated list
-    dinosCreated.splice(4, 0, Human);
+    // dinosCreated.splice(4, 0, Human);
 
-    (function addHuman(dinosDataArr){
+    // (function addHuman(){
         
-            dinosCreated[4].push('human')
+    //         dinosCreated[4].push('human')
      
-        
-    })(dinosCreated);
+    // })(dinosCreated);
 
    
     // Use IIFE to get human data from form
     function HumanConstructor(){
 
         this.species = 'human',
+        this.image = `./images/${(this.species.toLowerCase())}.png`    
         this.name = document.getElementById('name').value
 
         // Converting the Human heights to inches
@@ -174,7 +174,6 @@ var dinosData = [
             this.height = Math.round((Number(document.getElementById('cm').value)*39.370))
         }
  
-
         // Adding the weight from form to Human
         if(!document.getElementById('meter').checked) {
           
@@ -191,13 +190,39 @@ var dinosData = [
     function getHumanDataFromForm() {
         
         dinosCreated[4][1] = new HumanConstructor()
-        // return (console.log('dinosCreated including Human after Onclick=>', dinosCreated))
+
+     
     }(Human);
         
         console.log('dinosCreated a', dinosCreated);
 
 
+        (function displayTotalArray(){
+            
+            let divArray = []
+           dinosCreated.forEach((ele, idx) =>{
 
+                let tempEle = `<div key="${idx}">
+                
+                    <div>${ele[1].species}</div>
+                    <div>${ele[1].weight}</div>
+                    <div>${ele[1].height}</div>
+                    <div>${ele[1].diet}</div>
+                    <div>${ele[1].where}</div>
+                    <div>${ele[1].when}</div>
+                    <div>${ele[1].fact}</div>
+                    <div>${ele[1].image}</div>
+                    </div>`
+
+                
+                divArray += tempEle
+          
+            })
+            document.getElementById("grid").innerHTML = divArray;
+          
+        })();
+     
+      
    
 
 
