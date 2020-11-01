@@ -77,7 +77,6 @@ var dinosData = [
     // Create Dino Constructor
 
     function DinoConstructor(arr) {
-        this.name = ''
         this.species = arr.species,
         this.weight = arr.weight,
         this.height = arr.height,
@@ -88,19 +87,45 @@ var dinosData = [
       
     };
     // Add prototypes to the Dino constructor
+
+     // Create Dino Compare Method 1
+    // NOTE: Weight in JSON file is in lbs, height in inches. 
     DinoConstructor.prototype.compareWeight = function() {
         console.log(`The weight of ${this.species} is ${this.weight}`)
     };
+
+    // Create Dino Compare Method 2
+    // NOTE: Weight in JSON file is in lbs, height in inches.
     DinoConstructor.prototype.compareHeight = function() {
         console.log(`The Height of ${this.species} is ${this.height}`)
     };
+
+    // Create Dino Compare Method 3
+    // NOTE: Weight in JSON file is in lbs, height in inches.
     DinoConstructor.prototype.compareDiet = function() {
         console.log(`The Diet of ${this.species} is ${this.diet}`)
     };
 
     const dinosCreated = [];
 
-    // Loop through the Original Dinosauers 
+        // Loop that creates the name for each Dino in the dinosCreated array
+        (function createDinoName(dinosDataArr){
+            let count = 1
+            for(var i=0; i < dinosDataArr.length; i++) {
+    
+                let str = 'Dino number '+count;
+          
+                dinosCreated.push([str.valueOf()])
+         
+                count++
+            }
+        })(dinosData);
+    
+        console.log('dinosCreated =>', dinosCreated);
+    
+    // Create Dino Objects
+
+    // Loop through the Original Dinosauers and invoke the Constructor function on each of them.
     (function createDinoLoop(dinosDataArr){
    
         let temp;   
@@ -108,67 +133,91 @@ var dinosData = [
         dinosDataArr.forEach((ele, index) => {
         
         temp = new DinoConstructor(ele); 
-        dinosCreated.push(temp)
+        dinosCreated[index].push(temp)
         });
    
     })(dinosData);
 
     console.log('dinosCreated =>', dinosCreated);
 
-    // Loop that creates the name for each Dino in the dinosCreated array
-    (function createDinoName(dinosDataArr){
-        let count = 1
-        for(var i=0; i < dinosDataArr.length; i++) {
-
-            let str = 'DinoNumber'+count;
-      
-            dinosCreated[i].name = str;
-            count++
-        }
-    })(dinosCreated);
-
-
-
-    // Create Dino Objects
-        // let newDino = Object.create(DinoConstructor)
-
-        // console.log(newDino)
-
     // Create Human Object
+    let Human
 
     // Use IIFE to get human data from form
+    function GetHumanData(){
 
+        this.name = document.getElementById('name').value
 
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
+        // Converting the Human heights to inches
+        if(!document.getElementById('meter').checked) {
+            // Converting Feet from form to Inches 
+           let tempHeight = Number(((document.getElementById('feet').value) * 12))
+            // Adding the above inches to the inches from the from
+           let sum = (tempHeight += Number(document.getElementById('inches').value))
+           this.height = sum 
+        } else{
+            // converting cm from the form to inches
+            this.height = Math.round((Number(document.getElementById('cm').value)*39.370))
+        }
+ 
 
-    
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+        // Adding the weight from form to Human
+        if(document.getElementById('meter').checked) {
+          
+            this.weight =  Number(document.getElementById('imp-weight').value)
+        } else{
+            // converting kg from the form to lbs
+           
+            this.weight = Math.round((Number(document.getElementById('kg-weight').value)*2.2046))
+        }
+       
+        this.diet = document.getElementById('diet').value
+    };
 
-    
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+        Human = new GetHumanData()
+        console.log('Human', Human);
+
+   
 
 
     // Generate Tiles for each Dino in Array
-    (function ToggleForm(params) {
-        var elem = document.getElementById('grid');
-        elem.style['grid-template-columns'] = 'repeat(3, 1fr';
-        elem.style['grid-template-rows'] = 'repeat(3, 1fr';
-        elem.style['grid-template-rows'] = 'repeat(3, 1fr';
-        elem.style['grid-row-gap'] = '3px';
-        elem.style['grid-column-gap'] = '3px';
-        elem.style['width'] = '80vw';
-        elem.style['height'] = '80vh';
-        elem.style['border'] = '1px black solid';
-    })(); 
+    // (function ToggleForm(params) {
+    //     var elem = document.getElementById('grid');
+    //     elem.style['grid-template-columns'] = 'repeat(3, 1fr';
+    //     elem.style['grid-template-rows'] = 'repeat(3, 1fr';
+    //     elem.style['grid-template-rows'] = 'repeat(3, 1fr';
+    //     elem.style['grid-row-gap'] = '3px';
+    //     elem.style['grid-column-gap'] = '3px';
+    //     elem.style['position'] = 'absolute';
+    //     elem.style['top'] = '0';
+    //     elem.style['min-width'] = '100%';
+    //     elem.style['height'] = '100%';
+    //     elem.style['border'] = '1px black solid';
+    //     elem.style['margin'] = '0';
+
+    // })(); 
         // Add tiles to DOM
 
     // Remove form from screen
-    (function ToggleForm(params) {
-        var elem = document.getElementById('dino-compare');
-        elem.style.display = 'none';
-    })();
+    // (function ToggleForm(params) {
+    //     var elem = document.getElementById('dino-compare');
+    //     elem.style.display = 'none';
+    // })();
 
 // On button click, prepare and display infographic
+
+// Hiding metric options from DOM
+(function hideMetric(){
+    var elem = document.getElementById('metric-fields');
+        elem.style.display = 'none';
+})();
+
+function changeUnit() {
+    if(document.getElementById('meter').checked){
+        document.getElementById('imperial-fields').style.display = 'none';
+        document.getElementById('metric-fields').style.display = 'block';
+    } else{
+        document.getElementById('metric-fields').style.display = 'none';
+        document.getElementById('imperial-fields').style.display = 'block'; 
+    }
+}
