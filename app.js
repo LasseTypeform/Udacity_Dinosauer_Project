@@ -140,9 +140,23 @@ var dinosData = [
         temp = new DinoConstructor(ele); 
         dinosCreated.push(temp)
         });
+
        
+           
     })(dinosData);
 
+       // found the following code on how to shuffle on https://www.youtube.com/watch?v=5sNGqsMpW1E 
+       function shuffleDinos(arr){
+        if(dinosCreated.length === 8){
+            for(var i = arr.length -1; i > 0; i--){
+                let j = Math.floor(Math.random() * (i+1));
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }  
+        };
+        shuffleDinos(dinosCreated);
 
     // Create Human Object
     let person;
