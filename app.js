@@ -272,6 +272,16 @@ function hideForm(){
     document.getElementById('dino-compare').style.display = 'none'
 }
 
+    // let initial = game.innerHTML;
+
+function tryAgain(){
+   
+    window.location.reload()
+    // document.querySelector('form').style.display = 'block'
+    // displayTotalArray();
+}
+
+
 {/* <p>${ele.weight}</p>
 <p>${ele.height}</p>
 <p>${ele.diet}</p>
