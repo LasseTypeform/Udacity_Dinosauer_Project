@@ -91,19 +91,40 @@ var dinosData = [
      // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
     DinoConstructor.prototype.compareWeight = function() {
-        console.log(`The weight of ${this.species} is ${this.weight}`)
+
+        if(this.weight < dinosCreated[4].weight){
+            let tempWeight = (Math.round(dinosCreated[4].weight/this.weight))
+
+            console.log(`The ${this.species} is ${tempWeight} times smaller than ${this.name}`)
+        } else if(this.weight > dinosCreated[4].weight){
+            let tempWeight = (Math.round(this.weight/dinosCreated[4].weight))
+            console.log(`The ${this.species} is ${tempWeight} times larger than ${dinosCreated[4].name}`)
+
+        } else {console.log(`The ${this.species} and ${dinosCreated[4].name} both weights the same = ${dinosCreated[4].weight}`)}
+        
     };
 
     // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
     DinoConstructor.prototype.compareHeight = function() {
-        console.log(`The Height of ${this.species} is ${this.height}`)
+        
+        if(this.height < dinosCreated[4].height){
+            let tempheight = (Math.round(dinosCreated[4].height/this.height))
+
+            console.log(`The ${this.species} is ${tempheight} times smaller than ${dinosCreated[4].name}`)
+        } else if(this.height > dinosCreated[4].height){
+            let tempheight = (Math.round(this.height/dinosCreated[4].height))
+            console.log(`The ${this.species} is ${tempheight} times larger than ${dinosCreated[4].name}`)
+
+        } else {console.log(`The ${this.species} and ${dinosCreated[4].name} both heights the same = ${dinosCreated[4].height}`)}
+
     };
 
     // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
     DinoConstructor.prototype.compareDiet = function() {
-        console.log(`The Diet of ${this.species} is ${this.diet}`)
+        
+        if(this.diet == (dinosCreated[4].diet.toLowerCase())){
+            console.log(`The ${this.species} and ${dinosCreated[4].name} are both ${dinosCreated[4].diet}s`)
+        } else {console.log(`The ${this.species} is a ${this.diet} and the ${dinosCreated[4].name} is a ${dinosCreated[4].diet}`)}
     };
 
     const dinosCreated = [];
