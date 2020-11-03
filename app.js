@@ -200,7 +200,7 @@ var dinosData = [
         this.name = document.getElementById('name').value
 
         // Converting the Human heights to inches
-        if(!document.getElementById('meter').checked) {
+        if(!document.getElementById('metric').checked) {
             // Converting Feet from form to Inches 
            let tempHeight = Number(((document.getElementById('feet').value) * 12))
             // Adding the above inches to the inches from the from
@@ -212,7 +212,7 @@ var dinosData = [
         }
  
         // Adding the weight from form to Human
-        if(!document.getElementById('meter').checked) {
+        if(document.getElementById('metric').checked) {
             //if lbs is typed in, adding these to the human weight
             this.weight =  Number(document.getElementById('imp-weight').value)
         } else{
@@ -283,13 +283,52 @@ var dinosData = [
 
 // On button click, prepare and display infographic
     function getHumanDataFromForm() {
-        
-        dinosCreated[4] = new HumanConstructor()
+        // Adding conditions to prevent the code to run unless the needed fields are filled in
 
-        // Invoking the array below to display in the grid
-        displayTotalArray();
-        // Involomg function to remove form from the renderer
-        hideForm();
+            console.log("document.getElementById('name').value", document.getElementById('name').value);
+            console.log("document.getElementById('feet').value", document.getElementById('feet').value);
+            console.log("document.getElementById('inches').value", document.getElementById('inches').value);
+            console.log("document.getElementById('imp-weight').value", document.getElementById('imp-weight').value);
+            console.log("document.getElementById('cm').value", document.getElementById('cm').value);
+            console.log("document.getElementById('kg-weight').value", document.getElementById('kg-weight').value);
+        // Checking that all required Imperial options have been filled in to run the test
+        if(!document.getElementById('metric').checked){
+            if(document.getElementById('name').value !== null && 
+            document.getElementById('feet').value > 0 && 
+            document.getElementById('inches').value > 0 && 
+            document.getElementById('imp-weight').value > 0)
+            {
+                
+                dinosCreated[4] = new HumanConstructor()
+                // Invoking the array below to display in the grid
+                displayTotalArray();
+                // Involomg function to remove form from the renderer
+                hideForm();
+            } else {
+                alert(`Please fill in all fields to run the comparison test`)
+            }
+        }
+        // Checking that all required Metric options have been filled in to run the test
+        else if(document.getElementById('metric').checked){
+            if(document.getElementById('name').value !== null && 
+            document.getElementById('cm').value > 0 && 
+            document.getElementById('kg-weight').value > 0)
+            {
+                dinosCreated[4] = new HumanConstructor()
+                // Invoking the array below to display in the grid
+                displayTotalArray();
+                // Involomg function to remove form from the renderer
+                hideForm();
+            } else {
+                alert(`Please fill in all fields to run the comparison test`)
+            }
+        } 
+        // If none of the above is true, then alert the following message
+        else {
+            alert(`Please fill in all fields to run the comparison test`)
+        }
+
+   
     }(Human);
 
 // Function to hide the reset button from DOM
@@ -309,7 +348,7 @@ var dinosData = [
     })();
 //Function to change the form to either show the Imperial or Metric options
     function changeUnit() {
-        if(document.getElementById('meter').checked){
+        if(document.getElementById('metric').checked){
             document.getElementById('imperial-fields').style.display = 'none';
             document.getElementById('metric-fields').style.display = 'block';
         } else{
