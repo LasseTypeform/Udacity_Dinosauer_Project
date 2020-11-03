@@ -90,8 +90,8 @@ var dinosData = [
         "fact3": "Pigeon's second random fact"
     }
 ];
-    // Create Dino Constructor
 
+// Create Dino Constructor
     function DinoConstructor(arr) {
         this.species = arr.species,
         this.weight = arr.weight,
@@ -104,88 +104,96 @@ var dinosData = [
         this.fact3 = arr.fact3,
         this.image = `./images/${(this.species.toLowerCase())}.png`   
     };
-    // Add prototypes to the Dino constructor
+// Add prototypes to the Dino constructor
+// NOTE: Weight in JSON file is in lbs, height in inches. 
 
-     // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
+// Create Dino Method 1 - Compare Weight 
     DinoConstructor.prototype.compareWeight = function() {
 
+        // if Dino weighs more than human
         if(this.weight < dinosCreated[4].weight){
             let tempWeight = (Math.round(dinosCreated[4].weight/this.weight))
 
             return(`The ${this.species} weighs ${tempWeight} times less than ${this.name}`)
-        } else if(this.weight > dinosCreated[4].weight){
+        }
+        // if Dino weighs less than human
+        else if(this.weight > dinosCreated[4].weight){
             let tempWeight = (Math.round(this.weight/dinosCreated[4].weight))
             return(`The ${this.species} weighs ${tempWeight} times more than ${dinosCreated[4].name}`)
 
-        } else {return(`The ${this.species} and ${dinosCreated[4].name} both weights the same = ${dinosCreated[4].weight}`)}
+        } 
+        // if Dino weighs the same as human
+        else {return(`The ${this.species} and ${dinosCreated[4].name} both weights the same = ${dinosCreated[4].weight}`)}
         
     };
 
-    // Create Dino Compare Method 2
+// Create Dino Method 2 - Compare Height
     DinoConstructor.prototype.compareHeight = function() {
-        
+        // if Dino is higher than human
         if(this.height < dinosCreated[4].height){
             let tempheight = (Math.round(dinosCreated[4].height/this.height))
 
             return(`The ${this.species} is ${tempheight} times shorter than ${dinosCreated[4].name}`)
-        } else if(this.height > dinosCreated[4].height){
+        } 
+        // if Dino is shorter than human
+        else if(this.height > dinosCreated[4].height){
             let tempheight = (Math.round(this.height/dinosCreated[4].height))
             return(`The ${this.species} is ${tempheight} times higher than ${dinosCreated[4].name}`)
 
-        } else {return(`The ${this.species} and ${dinosCreated[4].name} both the same height = ${dinosCreated[4].height}`)}
+        } 
+        // if Dino and human has the same height
+        else {return(`The ${this.species} and ${dinosCreated[4].name} both the same height = ${dinosCreated[4].height}`)}
 
     };
 
-    // Create Dino Compare Method 3
+// Create Dino Method 3 - Compare Diet
     DinoConstructor.prototype.compareDiet = function() {
-        
+        // If Dino and human has the same diet
         if(this.diet == (dinosCreated[4].diet.toLowerCase())){
             return(`The ${this.species} and ${dinosCreated[4].name} are both ${dinosCreated[4].diet}s`)
-        } else {return(`The ${this.species} is a ${this.diet} and the ${dinosCreated[4].name} is a ${dinosCreated[4].diet}`)}
+        } 
+        // If Dino has a differnt diet than human
+        else {return(`The ${this.species} is a ${this.diet} and the ${dinosCreated[4].name} is a ${dinosCreated[4].diet}`)}
     };
 
     const dinosCreated = [];
 
-    // Create Dino Objects
-
-    // Loop through the Original Dinosauers and invoke the Constructor function on each of them.
+// Create Dino Objects
+// Looping through the Original Dinosauers and invoke the Constructor function on each of them.
     (function createDinoLoop(dinosDataArr){
         let temp;   
         
         dinosDataArr.forEach((ele) => {
         
         temp = new DinoConstructor(ele); 
-        dinosCreated.push(temp)
-        });
 
-       
-           
+        //Assigning each of the newly constucted Dinos to the global dinosCreated array
+        dinosCreated.push(temp)
+        });         
     })(dinosData);
 
        // found the following code on how to shuffle on https://www.youtube.com/watch?v=5sNGqsMpW1E 
        function shuffleFunction(arr){
-        // if(dinosCreated.length === 8){
             for(var i = arr.length -1; i > 0; i--){
                 let j = Math.floor(Math.random() * (i+1));
                 let temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
-        // }  
         };
+        // Using the shuffle function to randomize the order of the dinos in the global dinosCreated array
         shuffleFunction(dinosCreated);
 
-    // Create Human Object
+// Creating Human Object
     let person;
     let Human = [];
 
     Human.push(person);
   
-    // Add it to the dinosCreated list
+// Add the human object to the dinosCreated list
     dinosCreated.splice(4, 0, Human);
     
-    // Use IIFE to get human data from form
+// Use IIFE to get human data from form
     function HumanConstructor(){
         this.species = 'human',
         this.image = `./images/${(this.species.toLowerCase())}.png`    
@@ -205,37 +213,27 @@ var dinosData = [
  
         // Adding the weight from form to Human
         if(!document.getElementById('meter').checked) {
-          
+            //if lbs is typed in, adding these to the human weight
             this.weight =  Number(document.getElementById('imp-weight').value)
         } else{
-            // converting kg from the form to lbs
-           
+            // If kg is chosen, converting them to lbs and adding them to human weight
             this.weight = Math.round((Number(document.getElementById('kg-weight').value)*2.2046))
         }
-       
+            //Adding diet chosen from the form to the human object
         this.diet = document.getElementById('diet').value
     };
 
-    // On button click, prepare and display infographic
-    function getHumanDataFromForm() {
-        
-        dinosCreated[4] = new HumanConstructor()
-        displayTotalArray();
-        console.log('dinosCreated', dinosCreated);
-        hideForm();
-    }(Human);
-
-    // Generate Tiles for each Dino in Array
+// Creating the function to display all dinos and the Human in each of their tiles inside the grid. 
     function displayTotalArray(){
            
         let divArray = []
-        
+    // Looping through each of the object in the global dinosCreatd array
        dinosCreated.forEach((ele, idx) =>{
-    
+        // Correcting the path to retieve the T-Rex image
         if(ele.species === "Tyrannosaurus Rex"){
             ele.image = './images/tyrannosaurusrex.png'
         }
-
+        // If the element is Human show the following
         if(ele.species === 'human'){
             let tempEle = `<div key="${idx}" class="grid-item">
                
@@ -245,7 +243,9 @@ var dinosData = [
             </div>`
             divArray += tempEle
 
-        } else if(ele.species === 'Pigeon'){
+        } 
+        // If the Pigeon is Human show the following       
+        else if(ele.species === 'Pigeon'){
             let tempEle2 = `<div key="${idx}" class="grid-item">
                
                 <h3>${ele.species}</h3>
@@ -255,12 +255,14 @@ var dinosData = [
             </div>`
             divArray += tempEle2
 
-        } else {
-            // Create an arr to store all the 3 proto methods and the 3 facts for each Dino
+        } 
+        // If the element is Dino show the following
+        else {
+            // First create an arr to store all the 3 prototype methods and the 3 facts for each Dino
             let tempArr = []; 
             tempArr.push(ele.compareWeight(), ele.compareHeight(), ele.compareDiet(), ele.fact, ele.fact2, ele.fact3)
   
-            // Reuse the Shuffle function to change the order of the methods and the fact
+            // Reuse the Shuffle function from earlier to change the order of the methods and the facts
             this.shuffleFunction(tempArr);
 
             let tempEle3 = `<div key="${idx}" class="grid-item">              
@@ -272,54 +274,54 @@ var dinosData = [
             divArray += tempEle3
             }
         })
-
+        // Adding the above to the Grid
         document.getElementById("grid").innerHTML = divArray; 
+        // Displaying the Reset Button in the renderer
         showResetbtn();
        
     };
 
-// Hiding reset button from DOM
-// Hiding reset button from DOM
-(function hideResetBtn(){
-        document.getElementById('btnDiv').style.display = 'none';
-})();
+// On button click, prepare and display infographic
+    function getHumanDataFromForm() {
+        
+        dinosCreated[4] = new HumanConstructor()
 
-function showResetbtn(){
-    document.getElementById('btnDiv').style.display = 'block';
-}
+        // Invoking the array below to display in the grid
+        displayTotalArray();
+        // Involomg function to remove form from the renderer
+        hideForm();
+    }(Human);
 
-// Hiding metric options from DOM
-(function hideMetric(){
-    var metr = document.getElementById('metric-fields');
-        metr.style.display = 'none';
-})();
+// Function to hide the reset button from DOM
+    (function hideResetBtn(){
+            document.getElementById('btnDiv').style.display = 'none';
+    })();
 
-function changeUnit() {
-    if(document.getElementById('meter').checked){
-        document.getElementById('imperial-fields').style.display = 'none';
-        document.getElementById('metric-fields').style.display = 'block';
-    } else{
-        document.getElementById('metric-fields').style.display = 'none';
-        document.getElementById('imperial-fields').style.display = 'block'; 
+// Function to display the reset button in the DOM
+    function showResetbtn(){
+        document.getElementById('btnDiv').style.display = 'block';
     }
-}
 
-function hideForm(){
-    document.getElementById('dino-compare').style.display = 'none'
-}
-
-    // let initial = game.innerHTML;
-
-function tryAgain(){
-   
-    window.location.reload()
-    // document.querySelector('form').style.display = 'block'
-    // displayTotalArray();
-}
-
-
-{/* <p>${ele.weight}</p>
-<p>${ele.height}</p>
-<p>${ele.diet}</p>
-<p>${ele.where}</p>
-<p>${ele.when}</p> */}
+// Function to hide metric options from DOM, so only the Imperial options are the default.
+    (function hideMetric(){
+        var metr = document.getElementById('metric-fields');
+            metr.style.display = 'none';
+    })();
+//Function to change the form to either show the Imperial or Metric options
+    function changeUnit() {
+        if(document.getElementById('meter').checked){
+            document.getElementById('imperial-fields').style.display = 'none';
+            document.getElementById('metric-fields').style.display = 'block';
+        } else{
+            document.getElementById('metric-fields').style.display = 'none';
+            document.getElementById('imperial-fields').style.display = 'block'; 
+        }
+    }
+//Function to hide the form from the renderer. 
+    function hideForm(){
+        document.getElementById('dino-compare').style.display = 'none'
+    }
+// Function to be invoked by the Reset Button to reload the page in order to try again.
+    function tryAgain(){    
+        window.location.reload()
+    }
