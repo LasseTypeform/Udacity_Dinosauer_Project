@@ -8,7 +8,9 @@ var dinosData = [
         "diet": "herbavor",
         "where": "North America",
         "when": "Late Cretaceous",
-        "fact": "First discovered in 1889 by Othniel Charles Marsh"
+        "fact": "First discovered in 1889 by Othniel Charles Marsh",
+        "fact2": "Random fact about Triceratops",
+        "fact3": "Triceratops's second random fact"
     },
     {
         "species": "Tyrannosaurus Rex",
@@ -17,7 +19,9 @@ var dinosData = [
         "diet": "carnivor",
         "where": "North America",
         "when": "Late Cretaceous",
-        "fact": "The largest known skull measures in at 5 feet long."
+        "fact": "The largest known skull measures in at 5 feet long.",
+        "fact2": "Random fact about Tyrannosaurus Rex",
+        "fact3": "Tyrannosaurus Rex's second random fact"
     },
     {
         "species": "Anklyosaurus",
@@ -26,7 +30,9 @@ var dinosData = [
         "diet": "herbavor",
         "where": "North America",
         "when": "Late Cretaceous",
-        "fact": "Anklyosaurus survived for approximately 135 million years."
+        "fact": "Anklyosaurus survived for approximately 135 million years.",
+        "fact2": "Random fact about Anklyosaurus",
+        "fact3": "Anklyosaurus's second random fact"
     },
     {
         "species": "Brachiosaurus",
@@ -35,7 +41,9 @@ var dinosData = [
         "diet": "herbavor",
         "where": "North America",
         "when": "Late Jurasic",
-        "fact": "An asteroid was named 9954 Brachiosaurus in 1991."
+        "fact": "An asteroid was named 9954 Brachiosaurus in 1991.",
+        "fact2": "Random fact about Brachiosaurus",
+        "fact3": "Brachiosaurus's second random fact"
     },
     {
         "species": "Stegosaurus",
@@ -44,7 +52,9 @@ var dinosData = [
         "diet": "herbavor",
         "where": "North America, Europe, Asia",
         "when": "Late Jurasic to Early Cretaceous",
-        "fact": "The Stegosaurus had between 17 and 22 seperate places and flat spines."
+        "fact": "The Stegosaurus had between 17 and 22 seperate places and flat spines.",
+        "fact2": "Random fact about Stegosaurus",
+        "fact3": "Stegosaurus's second random fact"
     },
     {
         "species": "Elasmosaurus",
@@ -53,7 +63,9 @@ var dinosData = [
         "diet": "carnivor",
         "where": "North America",
         "when": "Late Cretaceous",
-        "fact": "Elasmosaurus was a marine reptile first discovered in Kansas."
+        "fact": "Elasmosaurus was a marine reptile first discovered in Kansas.",
+        "fact2": "Random fact about Elasmosaurus",
+        "fact3": "Elasmosaurus's second random fact"
     },
     {
         "species": "Pteranodon",
@@ -62,7 +74,9 @@ var dinosData = [
         "diet": "carnivor",
         "where": "North America",
         "when": "Late Cretaceous",
-        "fact": "Actually a flying reptile, the Pteranodon is not a dinosaur."
+        "fact": "Actually a flying reptile, the Pteranodon is not a dinosaur.",
+        "fact2": "Random fact about Pteranodon",
+        "fact3": "Pteranodon's second random fact"
     },
     {
         "species": "Pigeon",
@@ -71,7 +85,9 @@ var dinosData = [
         "diet": "herbavor",
         "where": "World Wide",
         "when": "Holocene",
-        "fact": "All birds are living dinosaurs."
+        "fact": "All birds are living dinosaurs.",
+        "fact2": "Random fact about Pigeon",
+        "fact3": "Pigeon's second random fact"
     }
 ];
     // Create Dino Constructor
@@ -84,7 +100,9 @@ var dinosData = [
         this.where = arr.where,
         this.when = arr.when,
         this.fact = arr.fact,
-        this.image = `./images/${(this.species.toLowerCase())}.png`      
+        this.fact2 = arr.fact2,
+        this.fact3 = arr.fact3,
+        this.image = `./images/${(this.species.toLowerCase())}.png`   
     };
     // Add prototypes to the Dino constructor
 
@@ -211,6 +229,7 @@ var dinosData = [
     function displayTotalArray(){
            
         let divArray = []
+        
        dinosCreated.forEach((ele, idx) =>{
     
         if(ele.species === "Tyrannosaurus Rex"){
@@ -237,18 +256,16 @@ var dinosData = [
             divArray += tempEle2
 
         } else {
-            // Create an arr to store all the 3 proto methods and the fact
+            // Create an arr to store all the 3 proto methods and the 3 facts for each Dino
             let tempArr = []; 
-            tempArr.push(ele.compareWeight(), ele.compareHeight(), ele.fact, ele.compareDiet())
+            tempArr.push(ele.compareWeight(), ele.compareHeight(), ele.compareDiet(), ele.fact, ele.fact2, ele.fact3)
   
             // Reuse the Shuffle function to change the order of the methods and the fact
             this.shuffleFunction(tempArr);
 
-            let tempEle3 = `<div key="${idx}" class="grid-item">
-               
+            let tempEle3 = `<div key="${idx}" class="grid-item">              
                     <h3>${ele.species}</h3>
-                    <p>${tempArr[1]}</p>
-                   
+                    <p>${tempArr[1]}</p>       
                     <img src='${ele.image}'></>
 
             </div>`
