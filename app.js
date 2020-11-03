@@ -283,14 +283,8 @@ var dinosData = [
 
 // On button click, prepare and display infographic
     function getHumanDataFromForm() {
-        // Adding conditions to prevent the code to run unless the needed fields are filled in
+    // Adding conditions to prevent the code to run unless the needed fields are filled in
 
-            console.log("document.getElementById('name').value", document.getElementById('name').value);
-            console.log("document.getElementById('feet').value", document.getElementById('feet').value);
-            console.log("document.getElementById('inches').value", document.getElementById('inches').value);
-            console.log("document.getElementById('imp-weight').value", document.getElementById('imp-weight').value);
-            console.log("document.getElementById('cm').value", document.getElementById('cm').value);
-            console.log("document.getElementById('kg-weight').value", document.getElementById('kg-weight').value);
         // Checking that all required Imperial options have been filled in to run the test
         if(!document.getElementById('metric').checked){
             if(document.getElementById('name').value !== null && 
