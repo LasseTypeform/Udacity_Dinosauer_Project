@@ -95,12 +95,12 @@ var dinosData = [
         if(this.weight < dinosCreated[4].weight){
             let tempWeight = (Math.round(dinosCreated[4].weight/this.weight))
 
-            console.log(`The ${this.species} is ${tempWeight} times smaller than ${this.name}`)
+            return(`The ${this.species} weighs ${tempWeight} times less than ${this.name}`)
         } else if(this.weight > dinosCreated[4].weight){
             let tempWeight = (Math.round(this.weight/dinosCreated[4].weight))
-            console.log(`The ${this.species} is ${tempWeight} times larger than ${dinosCreated[4].name}`)
+            return(`The ${this.species} weighs ${tempWeight} times more than ${dinosCreated[4].name}`)
 
-        } else {console.log(`The ${this.species} and ${dinosCreated[4].name} both weights the same = ${dinosCreated[4].weight}`)}
+        } else {return(`The ${this.species} and ${dinosCreated[4].name} both weights the same = ${dinosCreated[4].weight}`)}
         
     };
 
@@ -110,12 +110,12 @@ var dinosData = [
         if(this.height < dinosCreated[4].height){
             let tempheight = (Math.round(dinosCreated[4].height/this.height))
 
-            console.log(`The ${this.species} is ${tempheight} times smaller than ${dinosCreated[4].name}`)
+            return(`The ${this.species} is ${tempheight} times shorter than ${dinosCreated[4].name}`)
         } else if(this.height > dinosCreated[4].height){
             let tempheight = (Math.round(this.height/dinosCreated[4].height))
-            console.log(`The ${this.species} is ${tempheight} times larger than ${dinosCreated[4].name}`)
+            return(`The ${this.species} is ${tempheight} times higher than ${dinosCreated[4].name}`)
 
-        } else {console.log(`The ${this.species} and ${dinosCreated[4].name} both heights the same = ${dinosCreated[4].height}`)}
+        } else {return(`The ${this.species} and ${dinosCreated[4].name} both the same height = ${dinosCreated[4].height}`)}
 
     };
 
@@ -123,8 +123,8 @@ var dinosData = [
     DinoConstructor.prototype.compareDiet = function() {
         
         if(this.diet == (dinosCreated[4].diet.toLowerCase())){
-            console.log(`The ${this.species} and ${dinosCreated[4].name} are both ${dinosCreated[4].diet}s`)
-        } else {console.log(`The ${this.species} is a ${this.diet} and the ${dinosCreated[4].name} is a ${dinosCreated[4].diet}`)}
+            return(`The ${this.species} and ${dinosCreated[4].name} are both ${dinosCreated[4].diet}s`)
+        } else {return(`The ${this.species} is a ${this.diet} and the ${dinosCreated[4].name} is a ${dinosCreated[4].diet}`)}
     };
 
     const dinosCreated = [];
@@ -146,17 +146,17 @@ var dinosData = [
     })(dinosData);
 
        // found the following code on how to shuffle on https://www.youtube.com/watch?v=5sNGqsMpW1E 
-       function shuffleDinos(arr){
-        if(dinosCreated.length === 8){
+       function shuffleFunction(arr){
+        // if(dinosCreated.length === 8){
             for(var i = arr.length -1; i > 0; i--){
                 let j = Math.floor(Math.random() * (i+1));
                 let temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
-        }  
+        // }  
         };
-        shuffleDinos(dinosCreated);
+        shuffleFunction(dinosCreated);
 
     // Create Human Object
     let person;
@@ -226,14 +226,33 @@ var dinosData = [
             </div>`
             divArray += tempEle
 
-        } else {let tempEle2 = `<div key="${idx}" class="grid-item">
+        } else if(ele.species === 'Pigeon'){
+            let tempEle2 = `<div key="${idx}" class="grid-item">
                
-                    <h3>${ele.species}</h3>
-                    <p>${ele.fact}</p>
-                    <img src='${ele.image}'></>
+                <h3>${ele.species}</h3>
+                <p>${ele.fact}</p>
+                <img src='${ele.image}'></>
 
             </div>`
             divArray += tempEle2
+
+        } else {
+            // Create an arr to store all the 3 proto methods and the fact
+            let tempArr = []; 
+            tempArr.push(ele.compareWeight(), ele.compareHeight(), ele.fact, ele.compareDiet())
+  
+            // Reuse the Shuffle function to change the order of the methods and the fact
+            this.shuffleFunction(tempArr);
+
+            let tempEle3 = `<div key="${idx}" class="grid-item">
+               
+                    <h3>${ele.species}</h3>
+                    <p>${tempArr[1]}</p>
+                   
+                    <img src='${ele.image}'></>
+
+            </div>`
+            divArray += tempEle3
             }
         })
 
